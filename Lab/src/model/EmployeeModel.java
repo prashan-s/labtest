@@ -8,6 +8,7 @@ public class EmployeeModel {
 	public String facultyName;
 	public String department;
 	public String designation;
+	
 	public String getEmployee() {
 		return employeeID;
 	}
@@ -44,6 +45,8 @@ public class EmployeeModel {
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
+	
+	//Print Employee Details
 	@Override
 	public String toString() {
 		
