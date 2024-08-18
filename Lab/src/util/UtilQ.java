@@ -1,4 +1,4 @@
-package util;
+package a.b.c;
 
 import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.TransformerException;
@@ -13,16 +13,32 @@ import javax.xml.transform.TransformerConfigurationException;
 
 public class UtilQ extends UtilC {
 	
-	public static String Q(String id) throws Exception {
-		NodeList n; Element e = null;
-		n = DocumentBuilderFactory.newInstance().newDocumentBuilder()
-				.parse(new File("src/config/EmployeeQuery.xml"))
-				.getElementsByTagName("query");
-		for (int x = 0; x < n.getLength(); x++) {
-			e = (Element) n.item(x);
-			if (e.getAttribute("id").equals(id))
-				break;
+	private static final String employeeQueryPath = "src/b/c/d/EmployeeQuery.xml";
+	private static final String queryName = "query";
+	private static final String attributeName = "id";
+	
+	public static String Query(String id) throws Exception {
+		
+		try {
+			
+			Element e = null;
+			
+			NodeList n = DocumentBuilderFactory.newInstance().newDocumentBuilder()
+					.parse(new File(employeeQueryPath))
+					.getElementsByTagName(queryName);
+			
+			for (int x = 0; x < n.getLength(); x++) {
+				e = (Element) n.item(x);
+				if (e.getAttribute(attributeName).equals(id))
+					break;
+			}
+			
+			return e.getTextContent().trim();
+			
+		} catch (Exception e) {
+			throw e;
 		}
-		return e.getTextContent().trim();
+		
 	}
+	
 }

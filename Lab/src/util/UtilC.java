@@ -1,4 +1,4 @@
-package util;
+package a.b.c;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -14,7 +14,7 @@ public class UtilC {
 		try {
 			p.load(UtilQ.class.getResourceAsStream("../config/config.properties"));
 		} catch (Exception e) {
-			
+			//logger
 		}
 	}
 }
