@@ -10,13 +10,13 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.logging.Level;
 import java.sql.Statement;
-import util.UtilC;
-import util.UtilQ;
+import util.FridayRefactoringProperties;
+import util.EmployeeQueryProvider;
 import util.UtilTransform;
 import java.util.ArrayList;
 import java.util.Map;
 
-public class GetEmpService extends UtilC {
+public class GetEmpService extends FridayRefactoringProperties {
 
 	private final ArrayList<EmployeeModel> el = new ArrayList<EmployeeModel>();
 
@@ -31,8 +31,8 @@ public class GetEmpService extends UtilC {
 	public GetEmpService() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
-			c = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
-					p.getProperty("password"));
+			c = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
+					properties.getProperty("password"));
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -62,8 +62,8 @@ public class GetEmpService extends UtilC {
 	public void employeeTableCreate() {
 		try {
 			s = c.createStatement();
-			s.executeUpdate(UtilQ.Query("q2"));
-			s.executeUpdate(UtilQ.Query("q1"));
+			s.executeUpdate(EmployeeQueryProvider.Query("q2"));
+			s.executeUpdate(EmployeeQueryProvider.Query("q1"));
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -71,7 +71,7 @@ public class GetEmpService extends UtilC {
 
 	public void employeesAdd() {
 		try {
-			ps = c.prepareStatement(UtilQ.Query("q3"));
+			ps = c.prepareStatement(EmployeeQueryProvider.Query("q3"));
 			c.setAutoCommit(false);
 			for(int i = 0; i < el.size(); i++){
 				EmployeeModel e = el.get(i);
@@ -94,7 +94,7 @@ public class GetEmpService extends UtilC {
 
 		EmployeeModel e = new EmployeeModel();
 		try {
-			ps = c.prepareStatement(UtilQ.Query("q4"));
+			ps = c.prepareStatement(EmployeeQueryProvider.Query("q4"));
 			ps.setString(1, eid);
 			ResultSet R = ps.executeQuery();
 			while (R.next()) {
@@ -116,7 +116,7 @@ public class GetEmpService extends UtilC {
 	public void employeeDelete(String eid) {
 
 		try {
-			ps = c.prepareStatement(UtilQ.Query("q6"));
+			ps = c.prepareStatement(EmployeeQueryProvider.Query("q6"));
 			ps.setString(1, eid);
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -126,9 +126,10 @@ public class GetEmpService extends UtilC {
 
 	public void employeeDisplay() {
 
-		ArrayList<EmployeeModel> l = new ArrayList<EmployeeModel>();
+		ArrayList<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
+		
 		try {
-			ps = c.prepareStatement(UtilQ.Query("q5"));
+			ps = c.prepareStatement(EmployeeQueryProvider.Query("q5"));
 			ResultSet r = ps.executeQuery();
 			while (r.next()) {
 				EmployeeModel e = new EmployeeModel();
@@ -138,12 +139,12 @@ public class GetEmpService extends UtilC {
 				e.setFacultyName(r.getString(4));
 				e.getDepartment(r.getString(5));
 				e.setDesignation(r.getString(6));
-				l.add(e);
+				employeeList.add(e);
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
-		employeeOutput(l);
+		employeeOutput(employeeList);
 	}
 	
 	public void employeeOutput(ArrayList<EmployeeModel> l){
@@ -154,6 +155,7 @@ public class GetEmpService extends UtilC {
 				.println("================================================================================================================");
 		for(int i = 0; i < l.size(); i++){
 			EmployeeModel e = l.get(i);
+			System.out.println("Employee:"+ e);
 			System.out.println(e.getEmployee() + "\t" + e.getFullName() + "\t\t"
 					+ e.getAddress() + "\t" + e.getFacultyName() + "\t" + e.getDepartment() + "\t"
 					+ e.getDesignation() + "\n");

@@ -17,7 +17,7 @@ import javax.xml.transform.TransformerFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 
-public class UtilTransform extends UtilC {
+public class UtilTransform extends FridayRefactoringProperties {
 
 	private static final ArrayList<Map<String, String>> l = new ArrayList<Map<String, String>>();
 	

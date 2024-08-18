@@ -5,7 +5,7 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
 
-public class UtilQ extends UtilC {
+public class EmployeeQueryProvider extends FridayRefactoringProperties {
 	
 	private static final String employeeQueryPath = "src/config/EmployeeQuery.xml";
 	private static final String queryName = "query";
