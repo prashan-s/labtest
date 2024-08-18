@@ -1,30 +1,22 @@
 package services;
 
-import org.xml.sax.SAXException;
-
+import services.GetEmpService;
 import model.EmployeeModel;
 
 import java.sql.Connection;
 import java.util.logging.Logger;
 import java.sql.DriverManager;
-import javax.xml.parsers.ParserConfigurationException;
 import java.sql.PreparedStatement;
-import javax.xml.xpath.XPathExpressionException;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.logging.Level;
 import java.sql.Statement;
-import java.io.IOException;
-
 import util.UtilC;
 import util.UtilQ;
 import util.UtilTransform;
-
 import java.util.ArrayList;
 import java.util.Map;
 
-public class getEmpService extends UtilC {
+public class GetEmpService extends UtilC {
 
 	private final ArrayList<EmployeeModel> el = new ArrayList<EmployeeModel>();
 
@@ -33,14 +25,17 @@ public class getEmpService extends UtilC {
 	private static Statement s;
 
 	private PreparedStatement ps;
+	
+	private static final Logger logger = Logger.getLogger(GetEmpService.class.getName());
 
-	public getEmpService() {
+	public GetEmpService() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			c = DriverManager.getConnection(p.getProperty("url"), p.getProperty("username"),
 					p.getProperty("password"));
 		} catch (Exception e) {
-		} 
+			logger.log(Level.SEVERE, e.toString());
+		}
 	}
 
 	public void employyeeFromXML() {
@@ -60,6 +55,7 @@ public class getEmpService extends UtilC {
 				System.out.println(EMPLOYEE.toString() + "\n");
 			}
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
@@ -69,6 +65,7 @@ public class getEmpService extends UtilC {
 			s.executeUpdate(UtilQ.Q("q2"));
 			s.executeUpdate(UtilQ.Q("q1"));
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
@@ -89,6 +86,7 @@ public class getEmpService extends UtilC {
 			ps.executeBatch();
 			c.commit();
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
@@ -111,6 +109,7 @@ public class getEmpService extends UtilC {
 			l.add(e);
 			employeeOutput(l);
 		} catch (Exception ex) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
@@ -121,7 +120,7 @@ public class getEmpService extends UtilC {
 			ps.setString(1, eid);
 			ps.executeUpdate();
 		} catch (Exception e) {
-			e.printStackTrace();
+			logger.log(Level.SEVERE, e.toString());
 		}
 	}
 
@@ -142,6 +141,7 @@ public class getEmpService extends UtilC {
 				l.add(e);
 			}
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 		employeeOutput(l);
 	}

@@ -4,7 +4,7 @@ import javax.xml.transform.TransformerConfigurationException;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactoryConfigurationError;
 
-import services.getEmpService;
+import services.GetEmpService;
 import util.UtilTransform;
 
 public class ExecuteMain {
@@ -14,7 +14,7 @@ public class ExecuteMain {
 	 */
 	public static void main(String[] args) {
 
-		getEmpService employeeService = new getEmpService();
+		GetEmpService employeeService = new GetEmpService();
 		try {
 			UtilTransform.requestTransform();
 			employeeService.employyeeFromXML();
