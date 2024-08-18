@@ -20,11 +20,10 @@ import javax.xml.xpath.XPathConstants;
 public class UtilTransform extends FridayRefactoringProperties {
 
 	private static final ArrayList<Map<String, String>> l = new ArrayList<Map<String, String>>();
-	
 	private static final String employeeRequest = "src/config/EmployeeRequest.xml";
 	private static final String employeeModifiedXsl = "src/config/Employee-modified.xsl";
 	private static final String employeeModifiedResponseXml = "src/config/EmployeeResponse.xml";
-	private final static Logger logger = Logger.getLogger(UtilTransform.class.getName());
+	private static final Logger logger = Logger.getLogger(UtilTransform.class.getName());
 
 	public static void requestTransform() throws Exception {
 
