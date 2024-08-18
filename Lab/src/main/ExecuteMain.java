@@ -8,6 +8,7 @@ import util.UtilTransform;
 
 public class ExecuteMain {
 	
+	//Logger Implementation
 	private static final Logger logger = Logger.getLogger(ExecuteMain.class.getName());
 
 	/**
@@ -25,6 +26,7 @@ public class ExecuteMain {
 			employeeService.employeeDelete("EMP10001");
 			employeeService.employeeDisplay();
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 

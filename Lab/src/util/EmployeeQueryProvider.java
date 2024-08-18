@@ -13,6 +13,8 @@ public class EmployeeQueryProvider extends FridayRefactoringProperties {
 	private static final String employeeQueryPath = "src/config/EmployeeQuery.xml";
 	private static final String queryName = "query";
 	private static final String attributeName = "id";
+	
+	//Logger Implementation
 	private static final Logger logger = Logger.getLogger(EmployeeQueryProvider.class.getName());
 	
 	public static String Query(String id) throws Exception {
@@ -34,6 +36,7 @@ public class EmployeeQueryProvider extends FridayRefactoringProperties {
 			return e.getTextContent().trim();
 			
 		} catch (Exception e) {
+			//Logging the Exceptions and Throwing
 			logger.log(Level.SEVERE, e.toString());
 			throw e;
 		}

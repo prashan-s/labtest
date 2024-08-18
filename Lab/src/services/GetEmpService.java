@@ -26,6 +26,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 
 	private PreparedStatement preparedStatement;
 	
+	//Logger Implementation
 	private static final Logger logger = Logger.getLogger(GetEmpService.class.getName());
 
 	public GetEmpService() {
@@ -34,6 +35,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
 					properties.getProperty("password"));
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -55,6 +57,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 				System.out.println(employee.toString() + "\n");
 			}
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -65,6 +68,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 			statement.executeUpdate(EmployeeQueryProvider.Query("q2"));
 			statement.executeUpdate(EmployeeQueryProvider.Query("q1"));
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -86,6 +90,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 			preparedStatement.executeBatch();
 			connection.commit();
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -109,6 +114,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 			l.add(e);
 			employeeOutput(l);
 		} catch (Exception ex) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -120,6 +126,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 			preparedStatement.setString(1, eid);
 			preparedStatement.executeUpdate();
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 	}
@@ -142,6 +149,7 @@ public class GetEmpService extends FridayRefactoringProperties {
 				employeeList.add(e);
 			}
 		} catch (Exception e) {
+			//Logging the Exceptions
 			logger.log(Level.SEVERE, e.toString());
 		}
 		employeeOutput(employeeList);

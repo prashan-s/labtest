@@ -23,6 +23,7 @@ public class UtilTransform extends FridayRefactoringProperties {
 	private static final String employeeRequest = "src/config/EmployeeRequest.xml";
 	private static final String employeeModifiedXsl = "src/config/Employee-modified.xsl";
 	private static final String employeeModifiedResponseXml = "src/config/EmployeeResponse.xml";
+	//Logger Implementation
 	private static final Logger logger = Logger.getLogger(UtilTransform.class.getName());
 
 	public static void requestTransform() throws Exception {
@@ -64,6 +65,7 @@ public class UtilTransform extends FridayRefactoringProperties {
 			return l;
 			
 		} catch (Exception e) {
+			//Logging the Exceptions and Throwing
 			logger.log(Level.SEVERE, e.toString());
 			throw e;
 		}
