@@ -7,7 +7,7 @@ import org.w3c.dom.Element;
 
 public class UtilQ extends UtilC {
 	
-	private static final String employeeQueryPath = "src/b/c/d/EmployeeQuery.xml";
+	private static final String employeeQueryPath = "src/config/EmployeeQuery.xml";
 	private static final String queryName = "query";
 	private static final String attributeName = "id";
 	
