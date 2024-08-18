@@ -7,10 +7,11 @@ import java.util.logging.Logger;
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
-
+import constant.Constant;
 public class EmployeeQueryProvider extends FridayRefactoringProperties {
 	
-	private static final String employeeQueryPath = "src/config/EmployeeQuery.xml";
+	
+	private static final String employeeQueryPath = Constant.SRC_CONFIG_EMPLOYEE_QUERY_XML;
 	private static final String queryName = "query";
 	private static final String attributeName = "id";
 	
