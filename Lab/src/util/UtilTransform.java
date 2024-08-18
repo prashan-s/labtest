@@ -16,13 +16,16 @@ import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
+import constant.Constant;
 
 public class UtilTransform extends FridayRefactoringProperties {
 
+
+	
 	private static final ArrayList<Map<String, String>> l = new ArrayList<Map<String, String>>();
-	private static final String employeeRequest = "src/config/EmployeeRequest.xml";
-	private static final String employeeModifiedXsl = "src/config/Employee-modified.xsl";
-	private static final String employeeModifiedResponseXml = "src/config/EmployeeResponse.xml";
+	private static final String employeeRequest = Constant.SRC_CONFIG_EMPLOYEE_REQUEST_XML;
+	private static final String employeeModifiedXsl = Constant.SRC_CONFIG_EMPLOYEE_MODIFIED_XSL;
+	private static final String employeeModifiedResponseXml = Constant.SRC_CONFIG_EMPLOYEE_RESPONSE_XML;
 	private static final Logger logger = Logger.getLogger(UtilTransform.class.getName());
 
 	public static void requestTransform() throws Exception {

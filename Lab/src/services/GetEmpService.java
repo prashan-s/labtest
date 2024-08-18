@@ -15,6 +15,7 @@ import util.EmployeeQueryProvider;
 import util.UtilTransform;
 import java.util.ArrayList;
 import java.util.Map;
+import constant.Constant;
 
 public class GetEmpService extends FridayRefactoringProperties {
 
@@ -45,12 +46,12 @@ public class GetEmpService extends FridayRefactoringProperties {
 			for (int i = 0; i < s; i++) {
 				Map<String, String> l = UtilTransform.XMLXPATHS().get(i);
 				EmployeeModel employee = new EmployeeModel();
-				employee.setEmployeeId(l.get("XpathEmployeeIDKey"));
-				employee.setFullName(l.get("XpathEmployeeNameKey"));
-				employee.setAddress(l.get("XpathEmployeeAddressKey"));
-				employee.setFacultyName(l.get("XpathFacultyNameKey"));
-				employee.getDepartment(l.get("XpathDepartmentKey"));
-				employee.setDesignation(l.get("XpathDesignationKey"));
+				employee.setEmployeeId(l.get(Constant.XPATH_EMPLOYEE_ID_KEY));
+				employee.setFullName(l.get(Constant.XPATH_EMPLOYEE_NAME_KEY));
+				employee.setAddress(l.get(Constant.XPATH_EMPLOYEE_ADDRESS_KEY));
+				employee.setFacultyName(l.get(Constant.XPATH_FACULTY_NAME_KEY));
+				employee.getDepartment(l.get(Constant.XPATH_DEPARTMENT_KEY));
+				employee.setDesignation(l.get(Constant.XPATH_DESIGNATION_KEY));
 				employeeList.add(employee);
 				System.out.println(employee.toString() + "\n");
 			}
