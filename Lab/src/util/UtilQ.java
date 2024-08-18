@@ -1,6 +1,9 @@
 package util;
 
 import java.io.File;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 import javax.xml.parsers.DocumentBuilderFactory;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.Element;
@@ -10,6 +13,7 @@ public class UtilQ extends UtilC {
 	private static final String employeeQueryPath = "src/b/c/d/EmployeeQuery.xml";
 	private static final String queryName = "query";
 	private static final String attributeName = "id";
+	private static final Logger logger = Logger.getLogger(UtilQ.class.getName());
 	
 	public static String Query(String id) throws Exception {
 		
@@ -30,6 +34,7 @@ public class UtilQ extends UtilC {
 			return e.getTextContent().trim();
 			
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 			throw e;
 		}
 		

@@ -24,7 +24,7 @@ public class UtilTransform extends UtilC {
 	private static final String employeeRequest = "src/b/c/d/EmployeeRequest.xml";
 	private static final String employeeModifiedXsl = "src/b/c/d/Employee-modified.xsl";
 	private static final String employeeModifiedResponseXml = "src/b/c/d/EmployeeResponse.xml";
-	private final static Logger logger = Logger.getLogger(UtilTransform.class.getName());
+	private static final Logger logger = Logger.getLogger(UtilTransform.class.getName());
 
 	public static void requestTransform() throws Exception {
 
