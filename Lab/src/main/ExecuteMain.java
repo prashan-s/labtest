@@ -1,13 +1,14 @@
 package main;
 
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import services.GetEmpService;
 import util.UtilTransform;
 
 public class ExecuteMain {
+	
+	private static final Logger logger = Logger.getLogger(ExecuteMain.class.getName());
 
 	/**
 	 * @param args
@@ -24,6 +25,7 @@ public class ExecuteMain {
 			employeeService.employeeDelete("EMP10001");
 			employeeService.employeeDisplay();
 		} catch (Exception e) {
+			logger.log(Level.SEVERE, e.toString());
 		}
 
 	}
