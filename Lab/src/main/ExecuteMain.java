@@ -13,7 +13,7 @@ public class ExecuteMain {
 	/**
 	 * @param args
 	 */
-	public static void main(String[] args) throws Exception {
+	public static void main(String[] args) {
 
 		GetEmpService employeeService = new GetEmpService();
 		try {
@@ -26,7 +26,6 @@ public class ExecuteMain {
 			employeeService.employeeDisplay();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
-			throw e;
 		}
 
 	}

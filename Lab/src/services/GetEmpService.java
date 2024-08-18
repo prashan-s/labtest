@@ -18,20 +18,20 @@ import java.util.Map;
 
 public class GetEmpService extends FridayRefactoringProperties {
 
-	private final ArrayList<EmployeeModel> el = new ArrayList<EmployeeModel>();
+	private final ArrayList<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 
-	private static Connection c;
+	private static Connection connection;
 
-	private static Statement s;
+	private static Statement statement;
 
-	private PreparedStatement ps;
+	private PreparedStatement preparedStatement;
 	
 	private static final Logger logger = Logger.getLogger(GetEmpService.class.getName());
 
 	public GetEmpService() {
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			c = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
+			Class.forName(properties.getProperty("driverName"));
+			connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("username"),
 					properties.getProperty("password"));
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
@@ -44,15 +44,15 @@ public class GetEmpService extends FridayRefactoringProperties {
 			int s = UtilTransform.XMLXPATHS().size();
 			for (int i = 0; i < s; i++) {
 				Map<String, String> l = UtilTransform.XMLXPATHS().get(i);
-				EmployeeModel EMPLOYEE = new EmployeeModel();
-				EMPLOYEE.setEmployeeId(l.get("XpathEmployeeIDKey"));
-				EMPLOYEE.setFullName(l.get("XpathEmployeeNameKey"));
-				EMPLOYEE.setAddress(l.get("XpathEmployeeAddressKey"));
-				EMPLOYEE.setFacultyName(l.get("XpathFacultyNameKey"));
-				EMPLOYEE.getDepartment(l.get("XpathDepartmentKey"));
-				EMPLOYEE.setDesignation(l.get("XpathDesignationKey"));
-				el.add(EMPLOYEE);
-				System.out.println(EMPLOYEE.toString() + "\n");
+				EmployeeModel employee = new EmployeeModel();
+				employee.setEmployeeId(l.get("XpathEmployeeIDKey"));
+				employee.setFullName(l.get("XpathEmployeeNameKey"));
+				employee.setAddress(l.get("XpathEmployeeAddressKey"));
+				employee.setFacultyName(l.get("XpathFacultyNameKey"));
+				employee.getDepartment(l.get("XpathDepartmentKey"));
+				employee.setDesignation(l.get("XpathDesignationKey"));
+				employeeList.add(employee);
+				System.out.println(employee.toString() + "\n");
 			}
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
@@ -61,9 +61,9 @@ public class GetEmpService extends FridayRefactoringProperties {
 
 	public void employeeTableCreate() {
 		try {
-			s = c.createStatement();
-			s.executeUpdate(EmployeeQueryProvider.Query("q2"));
-			s.executeUpdate(EmployeeQueryProvider.Query("q1"));
+			statement = connection.createStatement();
+			statement.executeUpdate(EmployeeQueryProvider.Query("q2"));
+			statement.executeUpdate(EmployeeQueryProvider.Query("q1"));
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -71,20 +71,20 @@ public class GetEmpService extends FridayRefactoringProperties {
 
 	public void employeesAdd() {
 		try {
-			ps = c.prepareStatement(EmployeeQueryProvider.Query("q3"));
-			c.setAutoCommit(false);
-			for(int i = 0; i < el.size(); i++){
-				EmployeeModel e = el.get(i);
-				ps.setString(1, e.getEmployee());
-				ps.setString(2, e.getFullName());
-				ps.setString(3, e.getAddress());
-				ps.setString(4, e.getFacultyName());
-				ps.setString(5, e.getDepartment());
-				ps.setString(6, e.getDesignation());
-				ps.addBatch();
+			preparedStatement = connection.prepareStatement(EmployeeQueryProvider.Query("q3"));
+			connection.setAutoCommit(false);
+			for(int i = 0; i < employeeList.size(); i++){
+				EmployeeModel e = employeeList.get(i);
+				preparedStatement.setString(1, e.getEmployee());
+				preparedStatement.setString(2, e.getFullName());
+				preparedStatement.setString(3, e.getAddress());
+				preparedStatement.setString(4, e.getFacultyName());
+				preparedStatement.setString(5, e.getDepartment());
+				preparedStatement.setString(6, e.getDesignation());
+				preparedStatement.addBatch();
 			}
-			ps.executeBatch();
-			c.commit();
+			preparedStatement.executeBatch();
+			connection.commit();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -94,9 +94,9 @@ public class GetEmpService extends FridayRefactoringProperties {
 
 		EmployeeModel e = new EmployeeModel();
 		try {
-			ps = c.prepareStatement(EmployeeQueryProvider.Query("q4"));
-			ps.setString(1, eid);
-			ResultSet R = ps.executeQuery();
+			preparedStatement = connection.prepareStatement(EmployeeQueryProvider.Query("q4"));
+			preparedStatement.setString(1, eid);
+			ResultSet R = preparedStatement.executeQuery();
 			while (R.next()) {
 				e.setEmployeeId(R.getString(1));
 				e.setFullName(R.getString(2));
@@ -116,9 +116,9 @@ public class GetEmpService extends FridayRefactoringProperties {
 	public void employeeDelete(String eid) {
 
 		try {
-			ps = c.prepareStatement(EmployeeQueryProvider.Query("q6"));
-			ps.setString(1, eid);
-			ps.executeUpdate();
+			preparedStatement = connection.prepareStatement(EmployeeQueryProvider.Query("q6"));
+			preparedStatement.setString(1, eid);
+			preparedStatement.executeUpdate();
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -129,8 +129,8 @@ public class GetEmpService extends FridayRefactoringProperties {
 		ArrayList<EmployeeModel> employeeList = new ArrayList<EmployeeModel>();
 		
 		try {
-			ps = c.prepareStatement(EmployeeQueryProvider.Query("q5"));
-			ResultSet r = ps.executeQuery();
+			preparedStatement = connection.prepareStatement(EmployeeQueryProvider.Query("q5"));
+			ResultSet r = preparedStatement.executeQuery();
 			while (r.next()) {
 				EmployeeModel e = new EmployeeModel();
 				e.setEmployeeId(r.getString(1));

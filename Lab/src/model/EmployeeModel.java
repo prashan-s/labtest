@@ -2,12 +2,12 @@ package model;
 
 public class EmployeeModel {
 
-	public String employeeID;
-	public String fullName;
-	public String address;
-	public String facultyName;
-	public String department;
-	public String designation;
+	private String employeeID;
+	private String fullName;
+	private String address;
+	private String facultyName;
+	private String department;
+	private String designation;
 	
 	public String getEmployee() {
 		return employeeID;
