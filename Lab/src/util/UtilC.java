@@ -1,4 +1,4 @@
-package a.b.c;
+package util;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;

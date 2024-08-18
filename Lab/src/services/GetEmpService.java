@@ -62,8 +62,8 @@ public class GetEmpService extends UtilC {
 	public void employeeTableCreate() {
 		try {
 			s = c.createStatement();
-			s.executeUpdate(UtilQ.Q("q2"));
-			s.executeUpdate(UtilQ.Q("q1"));
+			s.executeUpdate(UtilQ.Query("q2"));
+			s.executeUpdate(UtilQ.Query("q1"));
 		} catch (Exception e) {
 			logger.log(Level.SEVERE, e.toString());
 		}
@@ -71,7 +71,7 @@ public class GetEmpService extends UtilC {
 
 	public void employeesAdd() {
 		try {
-			ps = c.prepareStatement(UtilQ.Q("q3"));
+			ps = c.prepareStatement(UtilQ.Query("q3"));
 			c.setAutoCommit(false);
 			for(int i = 0; i < el.size(); i++){
 				EmployeeModel e = el.get(i);
@@ -94,7 +94,7 @@ public class GetEmpService extends UtilC {
 
 		EmployeeModel e = new EmployeeModel();
 		try {
-			ps = c.prepareStatement(UtilQ.Q("q4"));
+			ps = c.prepareStatement(UtilQ.Query("q4"));
 			ps.setString(1, eid);
 			ResultSet R = ps.executeQuery();
 			while (R.next()) {
@@ -116,7 +116,7 @@ public class GetEmpService extends UtilC {
 	public void employeeDelete(String eid) {
 
 		try {
-			ps = c.prepareStatement(UtilQ.Q("q6"));
+			ps = c.prepareStatement(UtilQ.Query("q6"));
 			ps.setString(1, eid);
 			ps.executeUpdate();
 		} catch (Exception e) {
@@ -128,7 +128,7 @@ public class GetEmpService extends UtilC {
 
 		ArrayList<EmployeeModel> l = new ArrayList<EmployeeModel>();
 		try {
-			ps = c.prepareStatement(UtilQ.Q("q5"));
+			ps = c.prepareStatement(UtilQ.Query("q5"));
 			ResultSet r = ps.executeQuery();
 			while (r.next()) {
 				EmployeeModel e = new EmployeeModel();

@@ -1,30 +1,21 @@
-package a.b.c;
+package util;
 
-import javax.xml.transform.TransformerException;
 import javax.xml.xpath.XPathFactory;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.io.File;
-import java.io.IOException;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import javax.xml.xpath.XPathExpressionException;
 import javax.xml.parsers.DocumentBuilderFactory;
-import org.xml.sax.SAXException;
-import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.transform.Result;
 import javax.xml.transform.Source;
 import org.w3c.dom.Document;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerFactoryConfigurationError;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
-import javax.xml.xpath.XPathExpression;
 
 public class UtilTransform extends UtilC {
 
@@ -35,7 +26,7 @@ public class UtilTransform extends UtilC {
 	private static final String employeeModifiedResponseXml = "src/b/c/d/EmployeeResponse.xml";
 	private final static Logger logger = Logger.getLogger(UtilTransform.class.getName());
 
-	public static void RequestTransform() throws Exception {
+	public static void requestTransform() throws Exception {
 
 		Source x = new StreamSource(new File(employeeRequest));
 		Source s = new StreamSource(new File(employeeModifiedXsl));
